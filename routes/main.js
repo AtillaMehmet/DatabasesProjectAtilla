@@ -42,12 +42,12 @@ module.exports = function(app, SiteData) {
         res.render('register.ejs', SiteData);
        });
    
-   app.get('/addbook', function(req,res){
-       res.render('addbook.ejs', SiteData)
+   app.get('/addposts', function(req,res){
+       res.render('addposts.ejs', SiteData)
    });
-   app.post('/bookadded', function (req,res){
+   app.post('/topicadded', function (req,res){
    //saving data in database
-       let sqlquery= "INSERT INTO books (name, price) VALUES (?,?)";
+       let sqlquery= "INSERT INTO topics (name, price) VALUES (?,?)";
    //execute sql query
        let newrecord = [req.body.name, req.body.price];
        db.query(sqlquery, newrecord, (err,result) => {
@@ -60,8 +60,8 @@ module.exports = function(app, SiteData) {
        });
    //execute sql query
    app.get('/bargainbooks', function(req,res){
-       let sqlquery = "SELECT * FROM books WHERE price <=20";
-   //code above selects all books from the database where the price is less than 20
+       let sqlquery = "SELECT * FROM topics WHERE price <=520";
+   //code above selects all skins that have a shop price of less than 520 RP(curency).
    //execute sql query
        db.query(sqlquery, (err,result) => {
        if(err){
